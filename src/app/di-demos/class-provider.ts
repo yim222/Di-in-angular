@@ -1,6 +1,8 @@
-import { ClassProvider } from '@angular/core';
+import {ClassProvider, Injectable} from '@angular/core';
 
-export class Bootcamp {
+@Injectable({// Decorator that marks a class as available to be provided and injected as a dependency.
+  providedIn: 'root',
+})export class Bootcamp {
   constructor() {
 
     console.log("Hi Bootcamp")
