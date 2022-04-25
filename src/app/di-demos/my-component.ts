@@ -1,6 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Service1} from "./injected1.service";
-import {Bootcamp, SuperBootcamp} from "./class-provider";
+import {Component, FactoryProvider, OnInit} from "@angular/core";
+import {Service1, ServiceOnService} from "./injected1.service";
+import {
+  Bootcamp,
+  factoryProvider,
+  SuperBootcamp,
+  Value
+} from "./class-provider";
 //live example: https://stackblitz.com/run?file=src%2Fapp%2Fproviders.component.ts
 @Component({
   selector: 'app-my-component',
@@ -11,14 +16,29 @@ import {Bootcamp, SuperBootcamp} from "./class-provider";
     </div>
   `,
   styleUrls: [],
-  providers :[{ provide: Bootcamp, useClass: SuperBootcamp }]
+  providers :[
+    { provide: Bootcamp, useClass: SuperBootcamp },//why should I do it lingar?
+    SuperBootcamp//type provider
+    ,{provide: Value, useValue: 9}//value provider
+    ,factoryProvider
+
+  ]
 
 })
 
 export class MyComponent implements OnInit {
 
   constructor( private myInjectedService: Service1,
-               private myInjectedByClass: Bootcamp) {
+               private myInjectedByClass: SuperBootcamp,
+               private myInjectedByValue: Value,
+               private myInjectedServiceOnService: ServiceOnService
+  ){
+
+    console.log("myInjectedByValue = ", myInjectedByValue);
+    let a = factoryProvider.useFactory();
+    console.log("This value come by injected factory.");
+    console.log("a = ", a);
+
   }
   ngOnInit(): void {
 
