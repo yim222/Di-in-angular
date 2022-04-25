@@ -11,7 +11,7 @@ export class Service1 {
     console.log("Hi service 1 ");
   }
 
-  public doSomething(){
+  public doSomething() {
 
     console.log("Service 1 do something...")
   }
@@ -28,7 +28,7 @@ export class Service2 {
     console.log("Hi service 2 ");
   }
 
-  public doSomething(){
+  public doSomething() {
 
     console.log("Service 2 do something...")
   }
@@ -53,11 +53,10 @@ export class ServiceOnService {
 }
 
 
-
-@Injectable({// Decorator that marks a class as available to be provided and injected as a dependency.
-  providedIn: 'root'
-
-})
+@Injectable(
+  // {// Decorator that marks a class as available to be provided and injected as a dependency.
+  // }
+)
 
 export class CountingService {
 
@@ -65,12 +64,12 @@ export class CountingService {
     console.log("Hi I am CountingService");
 
   }
-  index:number = 0;
-  count(){
+
+  index: number = 0;
+
+  count() {
     this.index++;
   }
-
-
 
 
 }
