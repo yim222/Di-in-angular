@@ -37,7 +37,7 @@ export class ShowProvidersComponent implements OnInit {
     c.count();
 
 
-    // let d =  new useExistProvider.useExisting();
+    let d =  new useExistProvider.useExisting();
     console.log("d = " ,  d.index);//should be 2 since it's the same instance of c
 
 
