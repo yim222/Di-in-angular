@@ -13,6 +13,9 @@ import {
   Value
 } from "./class-provider";
 import {retry} from "rxjs";
+// import {NavyModule} from "./modules/navy-module";
+import {NavyService} from "./modules/services/NavyService";
+
 
 //live example: https://stackblitz.com/run?file=src%2Fapp%2Fproviders.component.ts
 @Component({
@@ -86,7 +89,11 @@ import {retry} from "rxjs";
       <p>new year = {{newCarData.year}}</p>
       <button (click)="addCar()">add car with use factory </button>
       <button (click)="doSomething()">Do something</button>
+<!--U cannot access the app-headquarters directly since it's defined inside moudule... -->
+<!--      <app-headquarters></app-headquarters>-->
 
+<!--    <app-main0navy></app-main0navy>-->
+    <app-main-infantry></app-main-infantry>
 
 
 
@@ -113,7 +120,7 @@ import {retry} from "rxjs";
     // { provide: "use-exist", useClass: CountingService}
     ,{provide: SIMPLE_OBJECT, useValue: {a: "zxczxc"}},
     carFactoryService//use factory...
-    ,{provide: "use-factory", useFactory:()=>alert("simple-factory... ")}
+    ,{provide: "use-factory", useFactory:()=>alert("simple-factory... ")},
 
   ]
 
@@ -135,6 +142,7 @@ export class MyComponent implements OnInit {
               @Inject("use-exist") public countingService6: CountingService2,
               @Inject(SIMPLE_OBJECT) public simpleObj: SimpleObject,
               // @Inject("use-factory") public simplefactory: any// not working well
+              private service: NavyService
 
   ) {
 
