@@ -77,11 +77,12 @@ import {retry} from "rxjs";
       new cars:
       <br/>
       Brand:
-      <input (keyup)="onKey($event)" name = "brand" ([ngModel])="newCarData">
+      <input  name = "brand" [(ngModel)]="newCarData.brand">
+<!--      Because You are usine ngModel You don't need the function -->
       <p>new brand = {{newCarData.brand}}</p>
       <br/>
       year:
-      <input (keyup)="onKey($event)" type = "number" name ="year">
+      <input (keyup)="onKey($event)" type = "number" name ="year" [(ngModel)]="newCarData.year">
       <p>new year = {{newCarData.year}}</p>
       <button (click)="addCar()">add car with use factory </button>
       <button (click)="doSomething()">Do something</button>
