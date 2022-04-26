@@ -9,7 +9,7 @@ import {NavyService} from "./services/NavyService";
 import {MainNavyComponent} from "./components/main-navy/main-navy.component";
 @NgModule({
   imports:      [  ],
-  providers:    [NavyService ],
+  providers:    [NavyService ],//will be available to entire app
   declarations: [MainNavyComponent, HeadquartersComponent, FoodWarehouseComponent, ArsenalComponent, PilotComponent  ],//soldier not available here
   exports: [
 
