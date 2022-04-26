@@ -1,6 +1,6 @@
 //classic injection:
 
-import {Injectable} from "@angular/core";
+import {FactoryProvider, Injectable, InjectionToken} from "@angular/core";
 
 @Injectable({// Decorator that marks a class as available to be provided and injected as a dependency.
   providedIn: 'root',
@@ -75,7 +75,6 @@ export class CountingService {
 }
 
 
-
 @Injectable(
   // {// Decorator that marks a class as available to be provided and injected as a dependency.
   // }
@@ -97,4 +96,21 @@ export class CountingService2 {
 
 }
 
+@Injectable()
+export class SimpleObject {
+  a = "amm";
+  b = "ahh";
+}
 
+export const SIMPLE_OBJECT = new InjectionToken<SimpleObject>('simple.object');
+
+
+export const carFactoryService: FactoryProvider = {
+
+  provide: "aa",
+  useFactory: (
+    brand: string, year: number) => {
+    return {brand: brand, year: year}
+  }
+
+};

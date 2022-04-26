@@ -1,9 +1,10 @@
 import {Component, FactoryProvider, Inject, OnInit} from "@angular/core";
 import {
+   carFactoryService,
   CountingService,
   CountingService2,
   Service1,
-  ServiceOnService
+  ServiceOnService, SIMPLE_OBJECT, SimpleObject
 } from "./injected1.service";
 import {
   Bootcamp,
@@ -11,6 +12,7 @@ import {
   SuperBootcamp,
   Value
 } from "./class-provider";
+import {retry} from "rxjs";
 
 //live example: https://stackblitz.com/run?file=src%2Fapp%2Fproviders.component.ts
 @Component({
@@ -62,6 +64,33 @@ import {
       </button>
 
       <h2>{{this.countingService6.index}}</h2>
+      <h3>Injection Token Object</h3>
+      <h4>a = {{simpleObj.a}}</h4>
+
+      <h2>Cars : </h2>
+      <ul>
+        <li *ngFor="let car of cars">
+
+          brand: {{car.brand}}, year: {{car.year}}
+        </li>
+      </ul>
+      new cars:
+      <br/>
+      Brand:
+      <input (keyup)="onKey($event)" name = "brand" ([ngModel])="newCarData">
+      <p>new brand = {{newCarData.brand}}</p>
+      <br/>
+      year:
+      <input (keyup)="onKey($event)" type = "number" name ="year">
+      <p>new year = {{newCarData.year}}</p>
+      <button (click)="addCar()">add car with use factory </button>
+      <button (click)="doSomething()">Do something</button>
+
+
+
+
+
+
 
 
     </div>
@@ -81,6 +110,9 @@ import {
     ,{provide: "token2", useClass: CountingService2},
     { provide: "use-exist", useExisting: CountingService}//Play with this, and see the differences
     // { provide: "use-exist", useClass: CountingService}
+    ,{provide: SIMPLE_OBJECT, useValue: {a: "zxczxc"}},
+    carFactoryService//use factory...
+    ,{provide: "use-factory", useFactory:()=>alert("simple-factory... ")}
 
   ]
 
@@ -95,12 +127,13 @@ export class MyComponent implements OnInit {
               public countingService1: CountingService,//must to be public if we want to use it on the template
               // private countingService1: CountingService//Error
               public countingService2: CountingService,
-//    @Inject('PRODUCT_SERVICE') private productService: ProductService
-              @Inject("token1")public countingService3: CountingService2,
-              @Inject("token2")public countingService4: CountingService2,
-              @Inject("token1")public countingService5: CountingService2,
-              @Inject("use-exist")public countingService6: CountingService2,
-
+              //    @Inject('PRODUCT_SERVICE') private productService: ProductService
+              @Inject("token1") public countingService3: CountingService2,
+              @Inject("token2") public countingService4: CountingService2,
+              @Inject("token1") public countingService5: CountingService2,
+              @Inject("use-exist") public countingService6: CountingService2,
+              @Inject(SIMPLE_OBJECT) public simpleObj: SimpleObject,
+              // @Inject("use-factory") public simplefactory: any// not working well
 
   ) {
 
@@ -111,10 +144,36 @@ export class MyComponent implements OnInit {
 
   }
 
+  cars: any = [
+    {brand: "Volvo", year: 2000},
+    {brand: "Honda", year: 2010}
+
+  ];
+  newCarData: any = {brand: "", year:  0};
+
+
+  onKey(event: any){
+    console.log("???, ", event.target.name);
+
+    this.newCarData[event.target.name] = event.target.value;
+
+  }
+  addCar(){
+    let newCar = carFactoryService.useFactory(this.newCarData.brand, this.newCarData.year);
+    this.cars.push(newCar);
+
+    this.newCarData = {
+      brand: "", year: 0
+
+    }
+  }
+
+  doSomething(){
+    // this.simplefactory();
+  }
+
   ngOnInit(): void {
 
     console.log("Hi My Component ");
   }
-
-
 }
