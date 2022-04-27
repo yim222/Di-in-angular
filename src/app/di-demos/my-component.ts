@@ -162,7 +162,7 @@ export class MyComponent implements OnInit {
 
 
   onKey(event: any){
-    console.log("???, ", event.target.name);
+    // console.log("???, ", event.target.name);
 
     this.newCarData[event.target.name] = event.target.value;
 
