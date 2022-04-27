@@ -105,8 +105,8 @@ import {NavyService} from "./modules/services/NavyService";
   `,
   styleUrls: [],
   providers: [
-    {provide: Bootcamp, useClass: SuperBootcamp},//why should I do it lingar?
-    SuperBootcamp//type provider
+    {provide: Bootcamp, useClass: SuperBootcamp}//why should I do it lingar?
+    ,SuperBootcamp//type provider
     , {provide: Value, useValue: 9}//value provider
     , factoryProvider
     // ,CountingService
@@ -128,7 +128,8 @@ import {NavyService} from "./modules/services/NavyService";
 
 export class MyComponent implements OnInit {
 
-  constructor(private myInjectedService: Service1,
+  constructor(
+              private myInjectedService: Service1,
               private myInjectedByClass: SuperBootcamp,
               private myInjectedByValue: Value,
               private myInjectedServiceOnService: ServiceOnService,

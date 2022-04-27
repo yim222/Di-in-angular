@@ -1,8 +1,10 @@
 import {ClassProvider, FactoryProvider, Injectable} from '@angular/core';
+//
+// @Injectable({// Decorator that marks a class as available to be provided and injected as a dependency.
+//   providedIn: 'root',
+// })
 
-@Injectable({// Decorator that marks a class as available to be provided and injected as a dependency.
-  providedIn: 'root',
-})export class Bootcamp {
+export class Bootcamp {
   constructor() {
 
     console.log("Hi Bootcamp")
